@@ -10,9 +10,16 @@
   <body>
     <div class="header">
       <h1 class="title">Tic-Tac-Toe</h1>
-      <h2 class="subtitle">Click on the gameboard below to play!</h2>
+      <h2 class="subtitle">Type in your name(s) below to play!</h2>
     </div>
-    <div class="grid"></div>
+    <div class="player-info">
+      <label for="name">Player One:</label>
+      <input type="text" name="name" class="name player-one" />
+      <label for="name2">Player Two:</label>
+      <input type="text" name="name-two" class="name player-two" />
+      <button class="info-button">Play!</button>
+    </div>
+    <div class="grid hidden"></div>
     <script src="./scriptTic.js"></script>
   </body>
 </html>
