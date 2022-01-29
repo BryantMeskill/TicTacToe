@@ -18,6 +18,25 @@ body {
   color: #eeeeee;
 }
 
+.player-info {
+  border: solid 3px #eeeeee;
+  color: #eeeeee;
+  font-size: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.name {
+  font-size: 30px;
+}
+
+.info-button {
+  font-size: 30px;
+  padding: 5px;
+  margin: 10px;
+}
 .grid {
   display: flex;
   flex-wrap: wrap;
@@ -28,7 +47,20 @@ body {
 }
 
 .tile {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 75px;
+  color: #eeeeee;
   height: 150px;
   width: 150px;
   border: solid 3px white;
+}
+
+.tile:hover {
+  background-color: #141414;
+}
+
+.hidden {
+  display: none;
 }
