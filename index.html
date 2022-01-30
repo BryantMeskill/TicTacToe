@@ -6,6 +6,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>TicTacToe</title>
     <link rel="stylesheet" href="./stylesheet.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Roboto:ital,wght@0,100;0,300;0,400;1,100;1,400&display=swap"
+      rel="stylesheet"
+    />
   </head>
   <body>
     <div class="header">
@@ -14,9 +20,9 @@
     </div>
     <div class="player-info">
       <label for="name">Player One:</label>
-      <input type="text" name="name" class="name player-one" />
+      <input type="text" name="name" id="p1" class="name player-one" />
       <label for="name2">Player Two:</label>
-      <input type="text" name="name-two" class="name player-two" />
+      <input type="text" name="name2" id="p2" class="name player-two" />
       <button class="info-button">Play!</button>
     </div>
     <div class="grid hidden"></div>
