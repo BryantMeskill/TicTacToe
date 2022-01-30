@@ -12,8 +12,8 @@ const player = (name, mark) => {
 const createGame = (() => {
   const infoButton = document.querySelector(".info-button");
   infoButton.addEventListener("click", () => {
-    const playerOne = player(document.querySelector(".player-one").value, "X");
-    const playerTwo = player(document.querySelector(".player-two").value, "O");
+    const playerOneName = document.querySelector(".player-one").value;
+    const playerTwoName = document.querySelector(".player-two").value;
     const inputBox = document.querySelector(".player-info");
     const boardGrid = document.querySelector(".grid");
     const subtitle = document.querySelector(".subtitle");
@@ -23,8 +23,8 @@ const createGame = (() => {
 
     playerOneSubtitle.classList.add(".subtitle");
     playerTwoSubtitle.classList.add(".subtitle");
-    playerOneSubtitle.textContent = `Player One: ${playerOne.name} (X)`;
-    playerTwoSubtitle.textContent = `Player Two: ${playerTwo.name} (O)`;
+    playerOneSubtitle.textContent = `Player One: ${playerOneName} (X)`;
+    playerTwoSubtitle.textContent = `Player Two: ${playerTwoName} (O)`;
 
     header.appendChild(playerOneSubtitle);
     header.appendChild(playerTwoSubtitle);
@@ -32,10 +32,9 @@ const createGame = (() => {
     inputBox.classList.add("hidden");
     subtitle.classList.add("hidden");
     boardGrid.classList.remove("hidden");
+    gamePlay();
   });
 })();
-
-//each player needs to be assigned 'x' or 'o' for the sake of logic later.
 
 //TODO: logic for game. (if three in a row, player one wins, ...) check for tie!
 
@@ -45,14 +44,22 @@ const render = (() => {
     const boardTile = document.createElement("div");
     boardTile.classList.add("tile");
     boardGrid.appendChild(boardTile);
-    boardTile.addEventListener("click", () => {
-      boardTile.textContent = "x";
-      gameBoard.board[i] = boardTile.textContent;
-    });
   }
 })();
-
 //object to control flow of game
-
+const gamePlay = () => {
+  const playerOne = player(document.querySelector(".player-one").value, "X");
+  const playerTwo = player(document.querySelector(".player-two").value, "O");
+  for (let i = 0; i < gameBoard.board.length; i++) {
+    const boardTile = document
+      .querySelectorAll(".tile")
+      .forEach((boardTile) => {
+        boardTile.addEventListener("click", () => {
+          boardTile.textContent = "X";
+          gameBoard.board[i] = boardTile.textContent;
+        });
+      });
+  }
+};
 //if one of something is needed, create a module (gameboard, displayController)
 //if multiples are needed, use a factory (players)
