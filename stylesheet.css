@@ -3,14 +3,19 @@
 }
 
 body {
-  background-color: #2e2d2d;
+  background-color: #383838;
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
+  margin: 0px;
+  animation: slide-in 0.5s;
 }
 
 .header {
+  font-family: "roboto", sans-serif;
+  background-color: #383838;
+  height: 20vh;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -18,14 +23,33 @@ body {
   color: #eeeeee;
 }
 
+.title {
+  font-family: "bebas neue", cursive;
+  font-size: 50px;
+}
+
 .player-info {
+  background-color: #7d47d3;
   border: solid 3px #eeeeee;
   color: #eeeeee;
   font-size: 30px;
+  font-family: "roboto", sans-serif;
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
+  animation: slide-in 0.5s;
+}
+
+@keyframes slide-in {
+  from {
+    margin-left: 500px;
+    opacity: 0;
+  }
+  to {
+    margin-left: 0px;
+    opacity: 1;
+  }
 }
 
 .name {
@@ -33,10 +57,21 @@ body {
 }
 
 .info-button {
+  font-family: "roboto", sans-serif;
   font-size: 30px;
   padding: 5px;
   margin: 10px;
+  border-radius: 15px;
+  color: #eeeeee;
+  background-color: #40aa57;
 }
+
+.info-button:hover {
+  color: #40aa57;
+  background-color: #eeeeee;
+  transform: 1s;
+}
+
 .grid {
   display: flex;
   flex-wrap: wrap;
@@ -44,6 +79,7 @@ body {
   align-items: center;
   min-width: none;
   width: 500px;
+  animation: slide-in 0.5s;
 }
 
 .tile {
@@ -58,7 +94,7 @@ body {
 }
 
 .tile:hover {
-  background-color: #141414;
+  background-color: #7d47d3;
 }
 
 .hidden {
