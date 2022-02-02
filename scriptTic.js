@@ -7,8 +7,6 @@ const player = (name, mark) => {
   return { name, mark };
 };
 
-//TODO: take data from user form to create player objects
-
 const createGame = (() => {
   const infoButton = document.querySelector(".info-button");
   infoButton.addEventListener("click", () => {
@@ -32,34 +30,46 @@ const createGame = (() => {
     inputBox.classList.add("hidden");
     subtitle.classList.add("hidden");
     boardGrid.classList.remove("hidden");
-    gamePlay();
+    render();
   });
 })();
-
-//TODO: logic for game. (if three in a row, player one wins, ...) check for tie!
-
-const render = (() => {
+let counter = 1;
+const render = () => {
+  const playerOne = player(document.querySelector(".player-one").value, "X");
+  const playerTwo = player(document.querySelector(".player-two").value, "O");
   const boardGrid = document.querySelector(".grid");
   for (let i = 0; i < gameBoard.board.length; i++) {
     const boardTile = document.createElement("div");
     boardTile.classList.add("tile");
     boardGrid.appendChild(boardTile);
-  }
-})();
-//object to control flow of game
-const gamePlay = () => {
-  const playerOne = player(document.querySelector(".player-one").value, "X");
-  const playerTwo = player(document.querySelector(".player-two").value, "O");
-  for (let i = 0; i < gameBoard.board.length; i++) {
-    const boardTile = document
-      .querySelectorAll(".tile")
-      .forEach((boardTile) => {
-        boardTile.addEventListener("click", () => {
-          boardTile.textContent = "X";
-          gameBoard.board[i] = boardTile.textContent;
-        });
+    if (gameBoard.board[i]) {
+      boardTile.textContent = gameBoard.board[i];
+    } else {
+      boardTile.addEventListener("click", () => {
+        if (counter % 2) {
+          gameBoard.board[i] = playerOne.mark;
+          counter++;
+          boardGrid.replaceChildren();
+          render();
+          //gameplay();
+        } else {
+          gameBoard.board[i] = playerTwo.mark;
+          counter++;
+          boardGrid.replaceChildren();
+          render();
+          //gameplay();
+        }
       });
+    }
   }
 };
-//if one of something is needed, create a module (gameboard, displayController)
-//if multiples are needed, use a factory (players)
+
+//click happens
+//update gameBoard.board
+//render those changes
+//check for 3/tie
+//object to control flow of game
+
+const gamePlay = () => {};
+// if one of something is needed, create a module (gameboard, displayController)
+// if multiples are needed, use a factory (players)
