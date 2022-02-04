@@ -68,7 +68,7 @@ body {
 .info-button:hover {
   color: #40aa57;
   background-color: #eeeeee;
-  transform: 1s;
+  transition: 0.5s;
 }
 
 .grid {
@@ -90,6 +90,37 @@ body {
   height: 150px;
   width: 150px;
   border: solid 3px white;
+}
+
+.win-section {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.player-win {
+  font-family: "bebas neue", cursive;
+  font-size: 50px;
+  color: #eeeeee;
+  animation: slide-in 0.7s;
+}
+
+.win-button {
+  font-family: "roboto", sans-serif;
+  font-size: 30px;
+  padding: 5px;
+  margin: 10px;
+  border-radius: 15px;
+  color: #eeeeee;
+  background-color: #40aa57;
+  animation: slide-in 0.9s;
+}
+
+.win-button:hover {
+  color: #40aa57;
+  background-color: #eeeeee;
+  transition: 0.5s;
 }
 
 .tile:hover {
