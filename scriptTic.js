@@ -51,25 +51,107 @@ const render = () => {
           counter++;
           boardGrid.replaceChildren();
           render();
-          //gameplay();
+          gamePlay();
         } else {
           gameBoard.board[i] = playerTwo.mark;
           counter++;
           boardGrid.replaceChildren();
           render();
-          //gameplay();
+          gamePlay();
         }
       });
     }
   }
 };
 
-//click happens
-//update gameBoard.board
-//render those changes
-//check for 3/tie
-//object to control flow of game
+function checkIndexesX(indexes) {
+  return indexes.every(function (indexes) {
+    if (gameBoard.board[indexes] === "X") {
+      return gameBoard.board[indexes];
+    }
+  });
+}
 
-const gamePlay = () => {};
-// if one of something is needed, create a module (gameboard, displayController)
-// if multiples are needed, use a factory (players)
+function checkIndexesO(indexes) {
+  return indexes.every(function (indexes) {
+    if (gameBoard.board[indexes] === "O") {
+      return gameBoard.board[indexes];
+    }
+  });
+}
+
+const gamePlay = () => {
+  const playerOne = player(document.querySelector(".player-one").value, "X");
+  const playerTwo = player(document.querySelector(".player-two").value, "O");
+  const header = document.querySelector(".header");
+  const boardGrid = document.querySelector(".grid");
+  const winSection = document.querySelector(".win-section");
+  const winningIndices = [
+    [0, 1, 2],
+    [3, 4, 5],
+    [6, 7, 8],
+    [0, 3, 6],
+    [1, 4, 7],
+    [2, 5, 8],
+    [0, 4, 8],
+    [6, 4, 2],
+  ];
+
+  if (winningIndices.some(checkIndexesX)) {
+    boardGrid.classList.add("hidden");
+    header.classList.add("hidden");
+    winSection.classList.remove("hidden");
+
+    const playerOneWin = document.createElement("div");
+    const newGameBtn = document.createElement("button");
+
+    playerOneWin.classList.add("player-win");
+    newGameBtn.classList.add("win-button");
+
+    playerOneWin.textContent = `${playerOne.name} wins!`;
+    newGameBtn.textContent = "New Game";
+
+    winSection.appendChild(playerOneWin);
+    winSection.appendChild(newGameBtn);
+    //TODO;
+    newGameBtn.addEventListener("click", () => {
+      for (let i = 0; i < gameBoard.board.length; i++) {
+        gameBoard.board[i] = "";
+      }
+      winSection.replaceChildren();
+      winSection.classList.add("hidden");
+      boardGrid.classList.remove("hidden");
+      header.classList.remove("hidden");
+      boardGrid.replaceChildren();
+      render();
+    });
+  } else if (winningIndices.some(checkIndexesO)) {
+    boardGrid.classList.add("hidden");
+    header.classList.add("hidden");
+    winSection.classList.remove("hidden");
+
+    const playerTwoWin = document.createElement("div");
+    const newGameBtn = document.createElement("button");
+
+    playerTwoWin.classList.add("player-win");
+    newGameBtn.classList.add("win-button");
+
+    playerTwoWin.textContent = `${playerTwo.name} wins!`;
+    newGameBtn.textContent = "New Game";
+
+    winSection.appendChild(playerTwoWin);
+    winSection.appendChild(newGameBtn);
+    //TODO
+    newGameBtn.addEventListener("click", () => {
+      for (let i = 0; i < gameBoard.board.length; i++) {
+        gameBoard.board[i] = "";
+      }
+      winSection.replaceChildren();
+      winSection.classList.add("hidden");
+      boardGrid.classList.remove("hidden");
+      header.classList.remove("hidden");
+      boardGrid.replaceChildren();
+      render();
+    });
+  }
+};
