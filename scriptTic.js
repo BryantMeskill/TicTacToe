@@ -35,6 +35,7 @@ const createGame = (() => {
 })();
 let counter = 1;
 const render = () => {
+  count = 0;
   const playerOne = player(document.querySelector(".player-one").value, "X");
   const playerTwo = player(document.querySelector(".player-two").value, "O");
   const boardGrid = document.querySelector(".grid");
@@ -80,6 +81,7 @@ function checkIndexesO(indexes) {
   });
 }
 
+let count = 0;
 const gamePlay = () => {
   const playerOne = player(document.querySelector(".player-one").value, "X");
   const playerTwo = player(document.querySelector(".player-two").value, "O");
@@ -113,10 +115,9 @@ const gamePlay = () => {
 
     winSection.appendChild(playerOneWin);
     winSection.appendChild(newGameBtn);
-    //TODO;
     newGameBtn.addEventListener("click", () => {
       for (let i = 0; i < gameBoard.board.length; i++) {
-        gameBoard.board[i] = "";
+        gameBoard.board[i] = undefined;
       }
       winSection.replaceChildren();
       winSection.classList.add("hidden");
@@ -141,10 +142,9 @@ const gamePlay = () => {
 
     winSection.appendChild(playerTwoWin);
     winSection.appendChild(newGameBtn);
-    //TODO
     newGameBtn.addEventListener("click", () => {
       for (let i = 0; i < gameBoard.board.length; i++) {
-        gameBoard.board[i] = "";
+        gameBoard.board[i] = undefined;
       }
       winSection.replaceChildren();
       winSection.classList.add("hidden");
@@ -153,5 +153,39 @@ const gamePlay = () => {
       boardGrid.replaceChildren();
       render();
     });
+  } else {
+    for (let i = 0; i < gameBoard.board.length; i++) {
+      if (gameBoard.board[i] !== undefined) {
+        count++;
+      }
+      if (count === 9) {
+        boardGrid.classList.add("hidden");
+        header.classList.add("hidden");
+        winSection.classList.remove("hidden");
+
+        const gameDraw = document.createElement("div");
+        const newGameBtn = document.createElement("button");
+
+        newGameBtn.classList.add("win-button");
+        gameDraw.classList.add("draw");
+
+        gameDraw.textContent = "It's a draw!";
+        newGameBtn.textContent = "New Game";
+
+        winSection.appendChild(gameDraw);
+        winSection.appendChild(newGameBtn);
+        newGameBtn.addEventListener("click", () => {
+          for (let i = 0; i < gameBoard.board.length; i++) {
+            gameBoard.board[i] = undefined;
+          }
+          winSection.replaceChildren();
+          winSection.classList.add("hidden");
+          boardGrid.classList.remove("hidden");
+          header.classList.remove("hidden");
+          boardGrid.replaceChildren();
+          render();
+        });
+      }
+    }
   }
 };
